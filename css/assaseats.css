@@ -9,3 +9,11 @@ main section{
 /* #mapa{
   border: 1px solid green;
 } */
+
+.mapa{
+ position: relative; 
+ top: 50%;
+ left: 50%;
+ width: 2000px;
+ /* transform: translate(-50%,-50%); */
+}

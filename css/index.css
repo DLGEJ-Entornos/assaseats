@@ -14,7 +14,7 @@
   display: block;
   margin: 0 auto;
 }
-object{
+.logo{
   position: relative;
   transform: translate(-50%,-50%);
   left: 50%;
