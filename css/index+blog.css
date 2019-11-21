@@ -14,12 +14,12 @@
   display: block;
   margin: 0 auto;
 }
-.logo{
+object{
   position: relative;
-  transform: translate(-50%,-50%);
+  /* transform: translate(-50%,-50%);
   left: 50%;
-  top:50%;
-  width: 300px;
+  top:50%; */
+  width: 1000px;
   filter: drop-shadow( 3px 3px 8px #670086);
 }
 section{
