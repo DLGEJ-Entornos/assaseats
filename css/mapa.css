@@ -1,26 +1,12 @@
-/* .parallax {
-  background-image: url("../img/coworking-fondoParallax2.jpg");
-  height: 590px; 
-  /* width: 400px; 
-  background-attachment: fixed;
-  background-position: left;
-  background-repeat: no-repeat;
-  background-size:cover;
-  border-bottom: 2px solid rgb(109, 68, 145);
-}
-.parallax img{
-  max-width: 500px;
-  width: 80%;
-  display: block;
-  margin: 0 auto;
-} */
-object{
+svg{
+  border: 1px solid green;
   position: relative;
   /* transform: translate(-50%,-50%);
   left: 50%;
   top:50%; */
-  width: 1000px;
-  filter: drop-shadow( 3px 3px 8px #670086);
+  width: 800px;
+  height: 800px;
+  /* filter: drop-shadow( 3px 3px 8px #670086); */
 }
 section{
   text-align: center;
