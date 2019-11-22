@@ -1,5 +1,30 @@
 //Extraemos información del DOM (tags del svg) y los almacenamos en nuestro modelo de datos.
-function Elementos(tipo,id,disponible,genCod,selec,tag) {
+function sacar(tag,target) {
+    switch (target) {
+        case 't':
+            
+            break;
+        case 'i':
+            
+            break;
+        case 'd':
+            
+            break;
+        case 'g':
+            
+            break;
+        case 's':
+            
+            break;
+        case 'ta':
+            
+            break;
+    
+        default:
+            break;
+    }
+}
+function Elemento(tipo,id,disponible,genCod,selec,tag) {
     this.tipo = tipo;
     this.id = id;
     this.disponible = disponible;
@@ -9,7 +34,7 @@ function Elementos(tipo,id,disponible,genCod,selec,tag) {
     this.tag = tag;
 }
 
-var tagsElements = [new Array(63),new Array(30),new Array(34)]; //MesasMarrones , MesasPcs, Salas
+var Elements = [new Array(63),new Array(30),new Array(34)]; //MesasMarrones , MesasPcs, Salas
 for (let i = 0; i < 63; i++) {
     let tagMesaM = document.getElementById("mesaMarron"+i);
     let tagMesaPc = document.getElementById("mesaPc"+i);
@@ -17,15 +42,23 @@ for (let i = 0; i < 63; i++) {
 
     // recoger tags en matriz o directamente generar objetos Elementos e introducirlos en un array de Obj elementos? Mejor esto ,no?
     if (tagMesaM != null) {
-        tagsElements[0][i] = tagMesaM;
+        
+        let elMesaM = new Elemento(sacar(tagMesaM,'t'),sacar(tagMesaM,'i'),sacar(tagMesaM,'d'),sacar(tagMesaM,'g'),sacar(tagMesaM,'s'),
+                                sacar(tagMesaM,'ta'));
+        Elements[0][i] = elMesaM;
     }
     if (tagMesaPc != null) {
-        tagsElements[1][i] = tagMesaPc;
+
+        let elMesaPc = new Elemento(sacar(tagMesaPc,'t'),sacar(tagMesaPc,'i'),sacar(tagMesaPc,'d'),sacar(tagMesaPc,'g'),sacar(tagMesaPc,'s'),
+                                sacar(tagMesaPc,'ta'));
+        Elements[1][i] = elMesaPc;
     }
     if (tagSala != null) {
-        tagsElements[2][i] = tagSala;
+        
+        let elSala = new Elemento(sacar(tagSala,'t'),sacar(tagSala,'i'),sacar(tagSala,'d'),sacar(tagSala,'g'),sacar(tagSala,'s'),
+                                sacar(tagSala,'ta'));
+        Elements[2][i] = elSala;
     }
-    
     
 }
 
