@@ -1,4 +1,15 @@
-let elementoTest = document.getElementById("path10787-88");
+let elementoTest = document.getElementById("sala");
 console.log(elementoTest);
-let svg = document.getElementsByClassName("mapa").item(2);
-console.log(document);
+function haz() {
+    alert("funca");
+}
+elementoTest.onclick = haz;
+
+
+/*
+mesaTOT:93
+    mesapc: 30
+    mesaMarron:63
+sala:34
+
+*/ 

@@ -40,3 +40,9 @@ aside #mesaPc{
   background-color: yellow;
   display: inline-block;
 }
+aside #ocup{
+  height: 25px;
+  width: 25px;
+  background-color: red;
+  display: inline-block;
+}
