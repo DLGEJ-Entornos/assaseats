@@ -1,10 +1,13 @@
-let elementoTest = document.getElementById("sala");
+let elementoTest = document.getElementById("sala33");
 console.log(elementoTest);
 function haz() {
-    alert("funca");
+    elementoTest.style.fill="red";
 }
 elementoTest.onclick = haz;
 
+function confirm() {
+    alert("test");
+}
 
 /*
 mesaTOT:93
