@@ -1,4 +1,5 @@
 //Ѡ Extraemos información del DOM (tags del svg) y los almacenamos en nuestro modelo de datos.
+console.log("test");
 function getTipo(tag) { //esto es validación mas q otra cosa?
 
     if (tag.tagName == "circle") {
@@ -41,13 +42,6 @@ function Elemento(tipo,id,disponible,genCod,selec,tag,coord) { //tag es por REFE
     this.changeColor = getColor;
     this.tag = tag;
     this.coord = coord;
-    //onclick para selecionables NO FUNC , quedate con la idea
-    // if (this.disponible) {
-    //     this.selec = true;
-    //     // this.tag = addOnclick(this.tag);
-    //     console.log(this.tag);
-    //     console.log(this.color);
-    // }
 }
 
 var Elements = [new Array(63),new Array(30),new Array(34)]; //MesasMarrones , MesasPcs, Salas
@@ -93,24 +87,24 @@ for (let i = 0; i < 50; i++) {
 console.log("ArrElementos: ",Elements[0][2].disponible," y color: ",Elements[0][2].tag.style.fill); //HAY QUE EJECUTAR .changeColor manualmente pa cambiar colores del dom, NO retorna el color
 console.log("Directam del dom: ",document.getElementById("mesaMarron1").style.fill);
 
-var bloqConfirm = true, coordCandidata;
+var bloqueoConfirm = true, coordCandidata;
 function seleccionar(coord) { //HAZ funcionalidad: Bool selec=true, COLOR GREEN +(control de cambiar selecionada)
     alert("selecionado: "+coord);
 
     let elemento = Elements[coord[0]][coord.substring(2,coord.length)];
 
-    if (!bloqConfirm && coord != coordCandidata) { //ya hay 1 selec y estas selec OTRO
+    if (!bloqueoConfirm && coord != coordCandidata) { //ya hay 1 selec y estas selec OTRO
         alert("Sólo puedes hacer 1 reserva. Deselecciona la actual.");
     }else{
         if (elemento.selec) {
             elemento.selec = false;
             elemento.changeColor();
-            bloqConfirm = true;
+            bloqueoConfirm = true;
         }else{
             elemento.selec = true;
             coordCandidata = coord;
             elemento.changeColor();
-            bloqConfirm = false;
+            bloqueoConfirm = false;
         }    
     }
 }
@@ -123,7 +117,15 @@ Elements.forEach(ArrElemByTipo =>{
         }
     } 
 })
+var btnConfirmar = document.getElementById("confirm");
+console.log(btnConfirmar);
+//document.getElementById("principal").appendChild(document.createElement("P")); //FUNCA!
 
+if (bloqueoConfirm) {
+    btnConfirmar.disabled = false;    
+}else
+    btnConfirmar.disabled = true;    
+bloqueoConfirm ? btnConfirmar.disabled = false : btnConfirmar.disabled = true;
 /*mesaTOT:93
     mesaMarron:63
     mesapc: 30
@@ -138,7 +140,7 @@ PASOS:
     3- SI esta disponible,  ADDAtribute element.onclick=clicable() OK
         3.1- Si Activar clicable() => .selec=true OK
         3.2- Si .select = true => HABILITAR Confirmar (DEJAR pal final)
-    4- SI click en otro elemento selecionable , NO PERMITIR Primero DESCLICAR.
+    4- SI click en otro elemento selecionable , NO PERMITIR Primero DESCLICAR. OK
     5- al clicar CONFIRMAR
         5.1 - Obtener el tipo de elemento; si es MESA MARRON => Imprimir CODIGO
                     Else noMesaMarron => mensaje de reserva hecho.
