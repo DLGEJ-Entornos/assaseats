@@ -1,4 +1,4 @@
-//Extraemos información del DOM (tags del svg) y los almacenamos en nuestro modelo de datos.
+//Ѡ Extraemos información del DOM (tags del svg) y los almacenamos en nuestro modelo de datos.
 function getTipo(tag) { //esto es validación mas q otra cosa?
 
     if (tag.tagName == "circle") {
@@ -12,29 +12,36 @@ function getTipo(tag) { //esto es validación mas q otra cosa?
         alert("Error, la etiqueta no es ni circulo , ni rectangulo. Es: "+tag.tagName);
 }
 
-function getColor(tipo,disponible,selec) {
-    if (!disponible) {
+function getColor() { //NO DEVUELVAS VALOR, CAMBIA EL COLOR DEL OBJETO EN EL DOM (THIS.TAG valdria?, pasado por referencia?)
+    if (!this.disponible) {
         return "red";
     }else{
-        if (selec) {
+        if (this.selec) {
             return "green";
         }else{
-            if (tipo == "mesaM") {
-                return "#a05a2c";
+            if (this.tipo == "mesaM") {
+                //return "#a05a2c";
+                return "purple";
             }else
                 return "#ffd42a";
         }
     }
-}
+}   
 function Elemento(tipo,id,disponible,genCod,selec,tag) { //tag es por REFERENCIA o por valor?
     this.tipo = tipo;
     this.id = id;
     this.disponible = disponible;
     this.genCod = genCod;
     this.selec = selec;
-    this.color = getColor(tipo,disponible,selec);
+    this.changeColor = getColor;
     this.tag = tag;
-    //onclick para selecionables
+    //onclick para selecionables NO FUNC , quedate con la idea
+    if (this.disponible) {
+        this.selec = true;
+        // this.tag = addOnclick(this.tag);
+        console.log(this.tag);
+        console.log(this.color);
+    }
 }
 
 var Elements = [new Array(63),new Array(30),new Array(34)]; //MesasMarrones , MesasPcs, Salas
@@ -59,19 +66,28 @@ for (let i = 0; i < 63; i++) {
         let elSala = new Elemento(getTipo(tagSala),tagSala.id,false,false,false,tagSala);
         Elements[2][i] = elSala;
     }
-    
 }
 
-                                        /*
-mesaTOT:93
+//Ѡ DESBLOQUEAMOS 27
+for (let i = 0; i < 9; i++) { //27(a desbloq) / 3 (tipoElementos) = 9 (primeros)
+    Elements[0][i].disponible = true;
+    Elements[1][i].disponible = true;
+    Elements[2][i].disponible = true;
+}
+console.log("ArrElementos: ",Elements[0][2].disponible," y color: ",Elements[0][2].color);
+console.log("Directam del dom: ",document.getElementById("sala3").style.fill);
+
+
+/*mesaTOT:93
     mesaMarron:63
     mesapc: 30
     sala:34
         ELEMENTOS TOTALES: 127 - PREBLOQUEADOS: 100
+    !NO SENTENCIAS DE CONTROL DE FLUJO DENTRO DE OBJETOS, SI FUNCIONES QUE SE PASAN MANUALMENTE PARAMETROS!
 
 PASOS:
-    1- Coger Todos los id's de objetos diferenciando entre sus tipos.
-    2- Bloquear la mayoria. (mas alante de forma random). NO DISPONIBLES POR DEF (EN CREACION DE OBJ) (se desbloquean los selecionables)
+    1- Coger Todos los id's de objetos diferenciando entre sus tipos. OK
+    2- Desbloquear 27. (mas alante de forma random). NO DISPONIBLES POR DEF (EN CREACION DE OBJ) (se desbloquean los selecionables)
     3- SI esta disponible(fill:red) no selecionable. 
     4- SI esta disponible, element.onclick=green
         4.1- Si 1 elemento.onclick=green => HABILITAR Confirmar
