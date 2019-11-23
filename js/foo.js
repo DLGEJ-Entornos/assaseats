@@ -13,17 +13,18 @@ function getTipo(tag) { //esto es validación mas q otra cosa?
 }
 
 function getColor() { //NO DEVUELVAS VALOR, CAMBIA EL COLOR DEL OBJETO EN EL DOM (THIS.TAG valdria?, pasado por referencia?)
+    console.log("entra en getColor");
     if (!this.disponible) {
-        return "red";
+        this.tag.style.fill = "red";
     }else{
         if (this.selec) {
-            return "green";
+            this.tag.style.fill = "green";
         }else{
             if (this.tipo == "mesaM") {
                 //return "#a05a2c";
-                return "purple";
+                this.tag.style.fill = "purple";
             }else
-                return "#ffd42a";
+            this.tag.style.fill = "#ffd42a";
         }
     }
 }   
@@ -36,12 +37,12 @@ function Elemento(tipo,id,disponible,genCod,selec,tag) { //tag es por REFERENCIA
     this.changeColor = getColor;
     this.tag = tag;
     //onclick para selecionables NO FUNC , quedate con la idea
-    if (this.disponible) {
-        this.selec = true;
-        // this.tag = addOnclick(this.tag);
-        console.log(this.tag);
-        console.log(this.color);
-    }
+    // if (this.disponible) {
+    //     this.selec = true;
+    //     // this.tag = addOnclick(this.tag);
+    //     console.log(this.tag);
+    //     console.log(this.color);
+    // }
 }
 
 var Elements = [new Array(63),new Array(30),new Array(34)]; //MesasMarrones , MesasPcs, Salas
@@ -53,29 +54,41 @@ for (let i = 0; i < 63; i++) {
     // recoger tags en matriz o directamente generar objetos Elementos e introducirlos en un array de Obj elementos? Mejor esto ,no?
     if (tagMesaM != null) {
         
-        let elMesaM = new Elemento(getTipo(tagMesaM),tagMesaM.id,false,false,false,tagMesaM);
+        let elMesaM = new Elemento(getTipo(tagMesaM),tagMesaM.id,true,false,false,tagMesaM);
         Elements[0][i] = elMesaM;
     }
     if (tagMesaPc != null) {
 
-        let elMesaPc = new Elemento(getTipo(tagMesaPc),tagMesaPc.id,false,false,false,tagMesaPc);
+        let elMesaPc = new Elemento(getTipo(tagMesaPc),tagMesaPc.id,true,false,false,tagMesaPc);
         Elements[1][i] = elMesaPc;
     }
     if (tagSala != null) {
         
-        let elSala = new Elemento(getTipo(tagSala),tagSala.id,false,false,false,tagSala);
+        let elSala = new Elemento(getTipo(tagSala),tagSala.id,true,false,false,tagSala);
         Elements[2][i] = elSala;
     }
 }
 
-//Ѡ DESBLOQUEAMOS 27
-for (let i = 0; i < 9; i++) { //27(a desbloq) / 3 (tipoElementos) = 9 (primeros)
-    Elements[0][i].disponible = true;
-    Elements[1][i].disponible = true;
-    Elements[2][i].disponible = true;
+//Ѡ BLOQUEO DE 100
+    //mMarron(63) => 50 //mesaPc(30) => 20 //sala(34) => 30
+for (let i = 0; i < 50; i++) {
+    // debugger;
+    Elements[0][i].disponible = false;
+    Elements[0][i].changeColor();
+    // console.log(Elements[0][i]);
+    if (i < 20) {
+        Elements[1][i].disponible = false;
+        Elements[1][i].changeColor();    
+    }
+    if (i < 30) {
+        Elements[2][i].disponible = false;
+        Elements[2][i].changeColor();
+    }
 }
-console.log("ArrElementos: ",Elements[0][2].disponible," y color: ",Elements[0][2].color);
-console.log("Directam del dom: ",document.getElementById("sala3").style.fill);
+//Pintamos TODOS (forma ineficiente, mejor todos disponibles a true y bloquear 100)
+
+console.log("ArrElementos: ",Elements[0][2].disponible," y color: ",Elements[0][2].tag.style.fill); //HAY QUE EJECUTAR .changeColor manualmente pa cambiar colores del dom, NO retorna el color
+console.log("Directam del dom: ",document.getElementById("mesaMarron1").style.fill);
 
 
 /*mesaTOT:93
