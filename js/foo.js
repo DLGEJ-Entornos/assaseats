@@ -19,12 +19,16 @@ function getColor() { //NO DEVUELVAS VALOR, CAMBIA EL COLOR DEL OBJETO EN EL DOM
     }else{
         if (this.selec) {
             this.tag.style.fill = "green";
+            
         }else{
             if (this.tipo == "mesaM") {
-                //return "#a05a2c";
+                //this.tag.style.fill = "#a05a2c";
                 this.tag.style.fill = "purple";
-            }else
-            this.tag.style.fill = "#ffd42a";
+                this.tag.style.cursor = "hand";
+            }else{
+                this.tag.style.fill = "#ffd42a";
+                this.tag.style.cursor = "hand";
+            }
         }
     }
 }   
@@ -85,11 +89,22 @@ for (let i = 0; i < 50; i++) {
         Elements[2][i].changeColor();
     }
 }
-//Pintamos TODOS (forma ineficiente, mejor todos disponibles a true y bloquear 100)
-
 console.log("ArrElementos: ",Elements[0][2].disponible," y color: ",Elements[0][2].tag.style.fill); //HAY QUE EJECUTAR .changeColor manualmente pa cambiar colores del dom, NO retorna el color
 console.log("Directam del dom: ",document.getElementById("mesaMarron1").style.fill);
 
+function seleccionar() {
+    alert("selecionado");
+}
+//Haciendo seleccionables los Disponibles (booleano+onclick en tag)
+Elements.forEach(ArrElemByTipo =>{
+    for(element of ArrElemByTipo){
+        if (element.disponible) {
+            element.tag.setAttribute("onclick", "seleccionar()");
+            element.changeColor();
+            
+        }
+    } 
+})
 
 /*mesaTOT:93
     mesaMarron:63
@@ -97,15 +112,16 @@ console.log("Directam del dom: ",document.getElementById("mesaMarron1").style.fi
     sala:34
         ELEMENTOS TOTALES: 127 - PREBLOQUEADOS: 100
     !NO SENTENCIAS DE CONTROL DE FLUJO DENTRO DE OBJETOS, SI FUNCIONES QUE SE PASAN MANUALMENTE PARAMETROS!
+    Funcion para modificar valores a gusto(por params) de todo Elements?
 
 PASOS:
     1- Coger Todos los id's de objetos diferenciando entre sus tipos. OK
-    2- Desbloquear 27. (mas alante de forma random). NO DISPONIBLES POR DEF (EN CREACION DE OBJ) (se desbloquean los selecionables)
-    3- SI esta disponible(fill:red) no selecionable. 
-    4- SI esta disponible, element.onclick=green
-        4.1- Si 1 elemento.onclick=green => HABILITAR Confirmar
-    5- SI click en otro elemento selecionable , CAMBIAR green.
-    6- al clicar CONFIRMAR
-        6.1 - Obtener el tipo de elemento; si es MESA MARRON => Imprimir CODIGO
+    2- BLOQUEAR 100. (mas alante de forma random). DISPONIBLES POR DEF (EN CREACION DE OBJ) OK
+    3- SI esta disponible,  ADDAtribute element.onclick=clicable() OK
+        3.1- Si Activar clicable() => .selec=true
+        3.2- Si .select = true => HABILITAR Confirmar
+    4- SI click en otro elemento selecionable , CAMBIAR .select y consecuentemente COLOR.
+    5- al clicar CONFIRMAR
+        5.1 - Obtener el tipo de elemento; si es MESA MARRON => Imprimir CODIGO
                     Else noMesaMarron => mensaje de reserva hecho.
 */ 
