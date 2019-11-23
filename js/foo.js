@@ -96,15 +96,19 @@ console.log("Directam del dom: ",document.getElementById("mesaMarron1").style.fi
 function seleccionar(coord) { //HAZ funcionalidad: Bool selec=true, COLOR GREEN +(control de cambiar selecionada)
     alert("selecionado: "+coord);
     let elemento = Elements[coord[0]][coord.substring(2,coord.length)];
-    elemento.selec = true;
-    elemento.changeColor();
+    // debugger;
+    if (elemento.selec) {
+        elemento.selec = false;
+        elemento.changeColor();    
+    }else{
+        elemento.selec = true;
+        elemento.changeColor();
+    }
 }
 //Haciendo seleccionables los Disponibles (EVENTonclick+changeColor en tag)
 Elements.forEach(ArrElemByTipo =>{
     for(element of ArrElemByTipo){
         if (element.disponible) {
-            // let ide = element.id;
-            // console.log(element.id);
             element.tag.setAttribute("onclick", "seleccionar('"+element.coord+"')");
             element.changeColor();
         }
