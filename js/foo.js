@@ -1,5 +1,8 @@
 //Ѡ Extraemos información del DOM (tags del svg) y los almacenamos en nuestro modelo de datos.
 console.log("test");
+var btnConfirmar = document.getElementById("confirm");
+btnConfirmar.disabled = true;
+
 function getTipo(tag) { //esto es validación mas q otra cosa?
 
     if (tag.tagName == "circle") {
@@ -87,25 +90,29 @@ for (let i = 0; i < 50; i++) {
 console.log("ArrElementos: ",Elements[0][2].disponible," y color: ",Elements[0][2].tag.style.fill); //HAY QUE EJECUTAR .changeColor manualmente pa cambiar colores del dom, NO retorna el color
 console.log("Directam del dom: ",document.getElementById("mesaMarron1").style.fill);
 
-var bloqueoConfirm = true, coordCandidata;
+//var bloqueoConfirm = true, 
+var coordCandidata;
 function seleccionar(coord) { //HAZ funcionalidad: Bool selec=true, COLOR GREEN +(control de cambiar selecionada)
+    // debugger;
     alert("selecionado: "+coord);
 
     let elemento = Elements[coord[0]][coord.substring(2,coord.length)];
 
-    if (!bloqueoConfirm && coord != coordCandidata) { //ya hay 1 selec y estas selec OTRO
+    if (!btnConfirmar.disabled && coord != coordCandidata) { //ya hay 1 selec y estas selec OTRO
         alert("Sólo puedes hacer 1 reserva. Deselecciona la actual.");
     }else{
         if (elemento.selec) {
             elemento.selec = false;
-            elemento.changeColor();
-            bloqueoConfirm = true;
+            elemento.changeColor(); //A ORIGINAL
+            // bloqueoConfirm = true;
+            btnConfirmar.disabled = true;
         }else{
             elemento.selec = true;
             coordCandidata = coord;
-            elemento.changeColor();
-            bloqueoConfirm = false;
-        }    
+            elemento.changeColor(); //A VERDE
+            // bloqueoConfirm = false;
+            btnConfirmar.disabled = false;
+        } 
     }
 }
 //Haciendo seleccionables los Disponibles (EVENTonclick+changeColor en tag)
@@ -118,14 +125,16 @@ Elements.forEach(ArrElemByTipo =>{
     } 
 })
 var btnConfirmar = document.getElementById("confirm");
-console.log(btnConfirmar);
+// console.log(btnConfirmar);
 //document.getElementById("principal").appendChild(document.createElement("P")); //FUNCA!
 
-if (bloqueoConfirm) {
-    btnConfirmar.disabled = false;    
-}else
-    btnConfirmar.disabled = true;    
-bloqueoConfirm ? btnConfirmar.disabled = false : btnConfirmar.disabled = true;
+
+// bloqueoConfirm ? btnConfirmar.disabled = false : btnConfirmar.disabled = true;
+
+function confirm() {
+    
+}
+
 /*mesaTOT:93
     mesaMarron:63
     mesapc: 30
