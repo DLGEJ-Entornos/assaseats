@@ -92,14 +92,17 @@ for (let i = 0; i < 50; i++) {
 console.log("ArrElementos: ",Elements[0][2].disponible," y color: ",Elements[0][2].tag.style.fill); //HAY QUE EJECUTAR .changeColor manualmente pa cambiar colores del dom, NO retorna el color
 console.log("Directam del dom: ",document.getElementById("mesaMarron1").style.fill);
 
-function seleccionar() { //HAZ funcionalidad: Bool selec=true, COLOR GREEN +(control de cambiar selecionada)
-    alert("selecionado");
+function seleccionar(id) { //HAZ funcionalidad: Bool selec=true, COLOR GREEN +(control de cambiar selecionada)
+    alert("selecionado: "+id);
+    
 }
-//Haciendo seleccionables los Disponibles (changeColor+EVENTonclick en tag)
+//Haciendo seleccionables los Disponibles (EVENTonclick+changeColor en tag)
 Elements.forEach(ArrElemByTipo =>{
     for(element of ArrElemByTipo){
         if (element.disponible) {
-            element.tag.setAttribute("onclick", "seleccionar()");
+            // let ide = element.id;
+            // console.log(element.id);
+            element.tag.setAttribute("onclick", "seleccionar('"+element.id+"')");
             element.changeColor();
         }
     } 
