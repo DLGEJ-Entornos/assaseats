@@ -22,8 +22,8 @@ function getColor() { //NO DEVUELVAS VALOR, CAMBIA EL COLOR DEL OBJETO EN EL DOM
             
         }else{
             if (this.tipo == "mesaM") {
-                //this.tag.style.fill = "#a05a2c";
-                this.tag.style.fill = "purple";
+                this.tag.style.fill = "#a05a2c";
+                // this.tag.style.fill = "purple";
                 this.tag.style.cursor = "hand";
             }else{
                 this.tag.style.fill = "#ffd42a";
@@ -92,16 +92,15 @@ for (let i = 0; i < 50; i++) {
 console.log("ArrElementos: ",Elements[0][2].disponible," y color: ",Elements[0][2].tag.style.fill); //HAY QUE EJECUTAR .changeColor manualmente pa cambiar colores del dom, NO retorna el color
 console.log("Directam del dom: ",document.getElementById("mesaMarron1").style.fill);
 
-function seleccionar() {
+function seleccionar() { //HAZ funcionalidad: Bool selec=true, COLOR GREEN +(control de cambiar selecionada)
     alert("selecionado");
 }
-//Haciendo seleccionables los Disponibles (booleano+onclick en tag)
+//Haciendo seleccionables los Disponibles (changeColor+EVENTonclick en tag)
 Elements.forEach(ArrElemByTipo =>{
     for(element of ArrElemByTipo){
         if (element.disponible) {
             element.tag.setAttribute("onclick", "seleccionar()");
             element.changeColor();
-            
         }
     } 
 })
