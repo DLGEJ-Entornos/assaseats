@@ -93,16 +93,25 @@ for (let i = 0; i < 50; i++) {
 console.log("ArrElementos: ",Elements[0][2].disponible," y color: ",Elements[0][2].tag.style.fill); //HAY QUE EJECUTAR .changeColor manualmente pa cambiar colores del dom, NO retorna el color
 console.log("Directam del dom: ",document.getElementById("mesaMarron1").style.fill);
 
+var bloqConfirm = true, coordCandidata;
 function seleccionar(coord) { //HAZ funcionalidad: Bool selec=true, COLOR GREEN +(control de cambiar selecionada)
     alert("selecionado: "+coord);
+
     let elemento = Elements[coord[0]][coord.substring(2,coord.length)];
-    // debugger;
-    if (elemento.selec) {
-        elemento.selec = false;
-        elemento.changeColor();    
+
+    if (!bloqConfirm && coord != coordCandidata) { //ya hay 1 selec y estas selec OTRO
+        alert("Sólo puedes hacer 1 reserva. Deselecciona la actual.");
     }else{
-        elemento.selec = true;
-        elemento.changeColor();
+        if (elemento.selec) {
+            elemento.selec = false;
+            elemento.changeColor();
+            bloqConfirm = true;
+        }else{
+            elemento.selec = true;
+            coordCandidata = coord;
+            elemento.changeColor();
+            bloqConfirm = false;
+        }    
     }
 }
 //Haciendo seleccionables los Disponibles (EVENTonclick+changeColor en tag)
@@ -127,9 +136,9 @@ PASOS:
     1- Coger Todos los id's de objetos diferenciando entre sus tipos. OK
     2- BLOQUEAR 100. (mas alante de forma random). DISPONIBLES POR DEF (EN CREACION DE OBJ) OK
     3- SI esta disponible,  ADDAtribute element.onclick=clicable() OK
-        3.1- Si Activar clicable() => .selec=true
-        3.2- Si .select = true => HABILITAR Confirmar
-    4- SI click en otro elemento selecionable , CAMBIAR .select y consecuentemente COLOR.
+        3.1- Si Activar clicable() => .selec=true OK
+        3.2- Si .select = true => HABILITAR Confirmar (DEJAR pal final)
+    4- SI click en otro elemento selecionable , NO PERMITIR Primero DESCLICAR.
     5- al clicar CONFIRMAR
         5.1 - Obtener el tipo de elemento; si es MESA MARRON => Imprimir CODIGO
                     Else noMesaMarron => mensaje de reserva hecho.
