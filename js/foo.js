@@ -32,7 +32,7 @@ function getColor() { //NO DEVUELVAS VALOR, CAMBIA EL COLOR DEL OBJETO EN EL DOM
         }
     }
 }   
-function Elemento(tipo,id,disponible,genCod,selec,tag) { //tag es por REFERENCIA o por valor?
+function Elemento(tipo,id,disponible,genCod,selec,tag,coord) { //tag es por REFERENCIA o por valor?
     this.tipo = tipo;
     this.id = id;
     this.disponible = disponible;
@@ -40,6 +40,7 @@ function Elemento(tipo,id,disponible,genCod,selec,tag) { //tag es por REFERENCIA
     this.selec = selec;
     this.changeColor = getColor;
     this.tag = tag;
+    this.coord = coord;
     //onclick para selecionables NO FUNC , quedate con la idea
     // if (this.disponible) {
     //     this.selec = true;
@@ -57,18 +58,18 @@ for (let i = 0; i < 63; i++) {
     
     // recoger tags en matriz o directamente generar objetos Elementos e introducirlos en un array de Obj elementos? Mejor esto ,no?
     if (tagMesaM != null) {
-        
-        let elMesaM = new Elemento(getTipo(tagMesaM),tagMesaM.id,true,false,false,tagMesaM);
+        let persCoord = "0,"+i;
+        let elMesaM = new Elemento(getTipo(tagMesaM),tagMesaM.id,true,false,false,tagMesaM,persCoord);
         Elements[0][i] = elMesaM;
     }
     if (tagMesaPc != null) {
-
-        let elMesaPc = new Elemento(getTipo(tagMesaPc),tagMesaPc.id,true,false,false,tagMesaPc);
+        let persCoord = "1,"+i;
+        let elMesaPc = new Elemento(getTipo(tagMesaPc),tagMesaPc.id,true,false,false,tagMesaPc,persCoord);
         Elements[1][i] = elMesaPc;
     }
     if (tagSala != null) {
-        
-        let elSala = new Elemento(getTipo(tagSala),tagSala.id,true,false,false,tagSala);
+        let persCoord = "2,"+i;
+        let elSala = new Elemento(getTipo(tagSala),tagSala.id,true,false,false,tagSala,persCoord);
         Elements[2][i] = elSala;
     }
 }
@@ -92,9 +93,11 @@ for (let i = 0; i < 50; i++) {
 console.log("ArrElementos: ",Elements[0][2].disponible," y color: ",Elements[0][2].tag.style.fill); //HAY QUE EJECUTAR .changeColor manualmente pa cambiar colores del dom, NO retorna el color
 console.log("Directam del dom: ",document.getElementById("mesaMarron1").style.fill);
 
-function seleccionar(id) { //HAZ funcionalidad: Bool selec=true, COLOR GREEN +(control de cambiar selecionada)
-    alert("selecionado: "+id);
-    
+function seleccionar(coord) { //HAZ funcionalidad: Bool selec=true, COLOR GREEN +(control de cambiar selecionada)
+    alert("selecionado: "+coord);
+    let elemento = Elements[coord[0]][coord.substring(2,coord.length)];
+    elemento.selec = true;
+    elemento.changeColor();
 }
 //Haciendo seleccionables los Disponibles (EVENTonclick+changeColor en tag)
 Elements.forEach(ArrElemByTipo =>{
@@ -102,7 +105,7 @@ Elements.forEach(ArrElemByTipo =>{
         if (element.disponible) {
             // let ide = element.id;
             // console.log(element.id);
-            element.tag.setAttribute("onclick", "seleccionar('"+element.id+"')");
+            element.tag.setAttribute("onclick", "seleccionar('"+element.coord+"')");
             element.changeColor();
         }
     } 
