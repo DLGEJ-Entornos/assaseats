@@ -1,0 +1,38 @@
+form{
+    text-align: center;
+}
+form > h1,h2{
+    padding-bottom: 1em;
+}
+div > *{
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 0.5em;
+}
+div{
+    background-color: #33363a;
+    border-radius: 1em;
+    margin-left: 20%;
+    margin-right: 20%;
+    padding-top: 1em;
+    height: 300px;
+}
+input{
+    font-size: 2em;
+    text-align: center;
+    border-radius: 1em;
+    background-color: rgb(109, 68, 145);
+    border: none;
+}
+#btnEntrar{
+    padding: 0.2em;
+    margin-top: 1em;
+    background-color: #33363a;
+    color: #33363a;
+    border: 2px solid #33363a;
+    cursor: pointer;
+    /*  COLORES PARA CUANDO HABILITE EL BOTON
+    color: rgb(109, 68, 145);
+    border: 2px solid rgb(109, 68, 145);
+    */
+}

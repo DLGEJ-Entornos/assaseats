@@ -1,5 +1,12 @@
+///// LOGIN /////
+
+
+
+
+/////////////////
+
 //Ѡ Extraemos información del DOM (tags del svg) y los almacenamos en nuestro modelo de datos.
-console.log("test");
+
 var btnConfirmar = document.getElementById("confirm");
 btnConfirmar.disabled = true;
 
