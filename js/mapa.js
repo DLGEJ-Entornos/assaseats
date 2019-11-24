@@ -135,7 +135,10 @@ function confirm() {
     if (elemento.tipo == "mesaM") {
         //ABRE 'VENTANA DE GENTIKET'(vGen) Pasandole CREDENCIALES
             //vGen = Genera cod
-            let credenciales ="creden";
+            
+            //Match Usuario = Tag Selecionado
+
+
             let winConfig = "width=700,height=500";
             var vGenTik = window.open("./tiket.html","ticket",winConfig);
             //enviando nombreUser a ventanaHija.

@@ -13,13 +13,13 @@
 <body>
     <div id="principal">
         <main>
-            <form action="blog.html" id="impresionTik">
-                <h1>SEATS. Reserva tu lugar de estudio.</h1>
-                <div>
+            <form action="mapa.html" id="impresionTik">
+                <h2>Reserva tu lugar de estudio.</h2> <br><br>
+                <div id="pseudoArticle">
                     <h2>Login</h2>
-                    <input placeholder="Usuario" type="text" id="user">
-                    <input placeholder="Contraseña" type="password" id="pass">
-                    <input type="submit" id="btnEntrar" value="Entrar">
+                    <input onchange="chkUsr()" placeholder="Usuario" type="text" id="user">
+                    <input onfocus="chkUsr()" onchange="chkPass()" placeholder="Contraseña" type="password" id="pass">
+                    <input  onmousedown="chkPass()" type="submit" id="btnEntrar" value="Entrar">
                 </div>                
 
             </form>
