@@ -57,7 +57,8 @@ aside #selec{
   border: 1px solid white;
   width: 400px;
   margin: 0 auto;
-  background-image: url("../img/codigoBGROUND.jpg");
+  /* background-image: url("../img/codigoBGROUND.jpg"); */
+  background-color: white;
   background-position-y: -10px;
   background-attachment: fixed;
   color: black;

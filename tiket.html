@@ -9,12 +9,6 @@
     <link rel="stylesheet" href="./css/mapa+tiket.css">
     <title>TICKET- Assaseats</title>
     <!-- <script src="./js/Globals.js"></script> -->
-    <script type="application/javascript">
-        console.log(localStorage.getItem("llaveQR"));
-        console.log(localStorage.getItem("nomUser"));
-        console.log(localStorage.getItem("apeUser"));
-    </script>
-
 </head>
 <body>
     <div id="principal">
@@ -35,12 +29,22 @@
         </main>
     </div>
     <script type="application/javascript">
-        // let ventanaPadre = window.opener;
-        // console.log(ventanaPadre);
-
-        function print() {
-            let email = document.getElementById("mail").value;
-        }
+        console.log(localStorage.getItem("llaveQR"));
+        console.log(localStorage.getItem("nomUser"));
+        console.log(localStorage.getItem("apeUser"));
+        
+        var nodoImg = document.createElement("IMG");
+        var atrSrc = document.createAttribute("src");
+        atrSrc.value = localStorage.getItem("llaveQR");
+        nodoImg.setAttributeNode(atrSrc);
+        document.getElementById("tiket").appendChild(nodoImg); 
+        
+        var nodoName = document.createElement("P");
+        var nomYape = document.createTextNode(
+            localStorage.getItem("nomUser")+" "+localStorage.getItem("apeUser")
+            );
+        nodoName.appendChild(nomYape);  
+        document.getElementById("tiket").appendChild(nodoName);
     </script>
 </body>
 </html>

@@ -143,12 +143,9 @@ function confirm() {
     console.log(localStorage);
 
     if (elemento.tipo == "mesaM") {
-        //ABRE 'VENTANA DE GENTIKET'(vGen) Pasandole CREDENCIALES
-            //vGen = Genera cod
-
-        let winConfig = "width=700,height=500";
+        //CREAMOS LA VENTANA HIJA PARA EL TIKET:
+        let winConfig = "width=700,height=700";
         var vGenTik = window.open("./tiket.html","ticket",winConfig);
-
     }else{
         if (elemento.tipo == "mesaPc") {
             alert("Has reservado esta mesa nº "+elemento.id+" con PC.");
@@ -182,5 +179,4 @@ PASOS:
                 new vGen(crendenciales,SeedCodigo?) ; vGen (BtnEnviarEmail(CODIGO | ventana))
                                                     En VentanaMAPA = Alert Mail Enviado!
             5.1.2 - Else noMesaMarron => mensaje de reserva hecho(PC Bloqueado).
-
 */ 
