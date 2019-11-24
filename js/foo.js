@@ -87,16 +87,15 @@ for (let i = 0; i < 50; i++) {
         Elements[2][i].changeColor();
     }
 }
-console.log("ArrElementos: ",Elements[0][2].disponible," y color: ",Elements[0][2].tag.style.fill); //HAY QUE EJECUTAR .changeColor manualmente pa cambiar colores del dom, NO retorna el color
-console.log("Directam del dom: ",document.getElementById("mesaMarron1").style.fill);
+//console.log("ArrElementos: ",Elements[0][2].disponible," y color: ",Elements[0][2].tag.style.fill); //HAY QUE EJECUTAR .changeColor manualmente pa cambiar colores del dom, NO retorna el color
+//console.log("Directam del dom: ",document.getElementById("mesaMarron1").style.fill);
 
-//var bloqueoConfirm = true, 
 var coordCandidata;
 function seleccionar(coord) { //HAZ funcionalidad: Bool selec=true, COLOR GREEN +(control de cambiar selecionada)
     // debugger;
     alert("selecionado: "+coord);
 
-    let elemento = Elements[coord[0]][coord.substring(2,coord.length)];
+    let elemento = Elements[coord[0]][coord.substring(2,coord.length)]; //asignacion q se repite en confirm() hazla en funcion
 
     if (!btnConfirmar.disabled && coord != coordCandidata) { //ya hay 1 selec y estas selec OTRO
         alert("Sólo puedes hacer 1 reserva. Deselecciona la actual.");
@@ -104,13 +103,11 @@ function seleccionar(coord) { //HAZ funcionalidad: Bool selec=true, COLOR GREEN 
         if (elemento.selec) {
             elemento.selec = false;
             elemento.changeColor(); //A ORIGINAL
-            // bloqueoConfirm = true;
             btnConfirmar.disabled = true;
         }else{
             elemento.selec = true;
             coordCandidata = coord;
             elemento.changeColor(); //A VERDE
-            // bloqueoConfirm = false;
             btnConfirmar.disabled = false;
         } 
     }
@@ -124,15 +121,22 @@ Elements.forEach(ArrElemByTipo =>{
         }
     } 
 })
-var btnConfirmar = document.getElementById("confirm");
-// console.log(btnConfirmar);
-//document.getElementById("principal").appendChild(document.createElement("P")); //FUNCA!
-
-
-// bloqueoConfirm ? btnConfirmar.disabled = false : btnConfirmar.disabled = true;
 
 function confirm() {
-    
+    console.log(coordCandidata);
+    let elemento = Elements[coordCandidata[0]][coordCandidata.substring(2,coordCandidata.length)];
+    if (elemento.tipo == "mesaM") {
+        //ABRE 'VENTANA DE GENTIKET'(vGen) Pasandole CREDENCIALES
+            //vGen = Genera cod
+            let credenciales ="creden";
+            let winConfig = "centerscreen,dependent=yes";
+            var vGenTik = window.open("./tiket.html","_parent",winConfig);
+    }else{
+        if (elemento.tipo == "mesaPc") {
+            alert("Has reservado esta mesa nº "+elemento.id+" con PC por: N horas.");
+        }else
+            alert("Has reservado esta sala nº "+elemento.id+" con PC por: N horas.");
+    }
 }
 
 /*mesaTOT:93
@@ -143,6 +147,11 @@ function confirm() {
     !NO SENTENCIAS DE CONTROL DE FLUJO DENTRO DE OBJETOS, SI FUNCIONES QUE SE PASAN MANUALMENTE PARAMETROS!
     Funcion para modificar valores a gusto(por params) de todo Elements?
 
+    Usa Screen.width para indicar que se bajen la app si estan en moviles?
+    Usa Navigator(.onLine,.canShare)
+    Window.print
+
+
 PASOS:
     1- Coger Todos los id's de objetos diferenciando entre sus tipos. OK
     2- BLOQUEAR 100. (mas alante de forma random). DISPONIBLES POR DEF (EN CREACION DE OBJ) OK
@@ -151,6 +160,10 @@ PASOS:
         3.2- Si .select = true => HABILITAR Confirmar (DEJAR pal final)
     4- SI click en otro elemento selecionable , NO PERMITIR Primero DESCLICAR. OK
     5- al clicar CONFIRMAR
-        5.1 - Obtener el tipo de elemento; si es MESA MARRON => Imprimir CODIGO
-                    Else noMesaMarron => mensaje de reserva hecho.
+        5.1 - Obtener el tipo de elemento; 
+            5.1.1 - Si es MESA MARRON => Imprimir CODIGO Con Credenciales.
+                new vGen(crendenciales,SeedCodigo?) ; vGen (BtnEnviarEmail(CODIGO | ventana))
+                                                    En VentanaMAPA = Alert Mail Enviado!
+            5.1.2 - Else noMesaMarron => mensaje de reserva hecho(PC Bloqueado).
+
 */ 
