@@ -1,10 +1,9 @@
-///// LOGIN /////
-
-
+/////Ѡ RECUPERANDO CREDENCIALES DEL USUARIO LOGUEADO /////
+console.log(localStorage.getItem("nomUser"));
+console.log(localStorage.getItem("apeUser"));
 /////////////////
 
 //Ѡ Extraemos información del DOM (tags del svg) y los almacenamos en nuestro modelo de datos.
-
 var btnConfirmar = document.getElementById("confirm");
 btnConfirmar.disabled = true;
 
@@ -92,13 +91,9 @@ for (let i = 0; i < 50; i++) {
         Elements[2][i].changeColor();
     }
 }
-//console.log("ArrElementos: ",Elements[0][2].disponible," y color: ",Elements[0][2].tag.style.fill); //HAY QUE EJECUTAR .changeColor manualmente pa cambiar colores del dom, NO retorna el color
-//console.log("Directam del dom: ",document.getElementById("mesaMarron1").style.fill);
 
 var coordCandidata;
 function seleccionar(coord) { //HAZ funcionalidad: Bool selec=true, COLOR GREEN +(control de cambiar selecionada)
-    // debugger;
-    //alert("selecionado: "+coord);
 
     let elemento = Elements[coord[0]][coord.substring(2,coord.length)]; //asignacion q se repite en confirm() hazla en funcion
 
@@ -126,7 +121,6 @@ Elements.forEach(ArrElemByTipo =>{
         }
     } 
 })
-
 function confirm() {
     // console.log(coordCandidata);
     // let exit = false;
@@ -139,33 +133,22 @@ function confirm() {
     //     console.log(arrUsers[i].llave);
     //     }
     // }
-
-    
-    
-
-
-
+ 
     let elemento = Elements[coordCandidata[0]][coordCandidata.substring(2,coordCandidata.length)];
 
+    // ALMACENAMOS PERMANENTEMENTE EL CODIGO-TIKET DEL USUARIO
     localStorage.llaveQR = localStorage.getItem("nomUser")+coordCandidata;
-    console.log(localStorage.getItem("llaveQR"));
-
     localStorage.llaveQR = "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data="+
         localStorage.llaveQR;
-
     console.log(localStorage);
+
     if (elemento.tipo == "mesaM") {
         //ABRE 'VENTANA DE GENTIKET'(vGen) Pasandole CREDENCIALES
             //vGen = Genera cod
 
-            let winConfig = "width=700,height=500";
-            var vGenTik = window.open("./tiket.html","ticket",winConfig);
-            //enviando nombreUser a ventanaHija.
-            var nodoP = vGenTik.document.createElement("p");
-            var nombreUser = document.createTextNode("manolo garcia");
-            nodoP.appendChild(nombreUser);
-            console.log(vGenTik.document.body.appendChild(nodoP));
-            //
+        let winConfig = "width=700,height=500";
+        var vGenTik = window.open("./tiket.html","ticket",winConfig);
+
     }else{
         if (elemento.tipo == "mesaPc") {
             alert("Has reservado esta mesa nº "+elemento.id+" con PC.");

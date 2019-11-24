@@ -1,3 +1,14 @@
+function Usuario(user,pass,nombre,apellidos,llave) {
+    this.user = user;
+    this.pass = pass;
+    this.nombre = nombre;
+    this.apellidos = apellidos;
+    this.llave =llave;
+}
+let admin = new Usuario("admin","admin","Manolo","Garcia");
+var arrUsuarios = [];
+arrUsuarios.push(admin);
+
 let btnEntrar = document.getElementById("btnEntrar");
 btnEntrar.disabled = true;
 let inUser = document.getElementById("user");
@@ -6,7 +17,6 @@ inPass.disabled = true;
 
 function chkUsr() {
     let userVal = false;
-    console.log("responseUser");
     arrUsuarios.forEach(Usuario =>{
         if (inUser.value == Usuario.user) {
             userVal = true;
@@ -20,30 +30,28 @@ function chkUsr() {
         }
     })
 }
-
 function chkPass() {
-    console.log("responsePass");
     
     let passVal = false;
-    console.log("responseUser");
     arrUsuarios.forEach(Usuario =>{
         if (inPass.value == Usuario.pass) {
             passVal = true;
             btnEntrar.style = "visibility:visible;";
             btnEntrar.disabled=false;
             inUser.style = "visibility:hidden;";
-            localStorage.nomUser = Usuario.user; //Usuario GUARDADO?
+            
+            localStorage.nomUser = Usuario.nombre;  //GUARDADO PERMANENTE DE CREDENCIALES
+            localStorage.apeUser = Usuario.apellidos;
         }else{
             inUser.style = "visibility:visible;";
             btnEntrar.disabled=true;
             btnEntrar.style = "visibility:hidden;";
-            localStorage.Usuario.clear();
+            localStorage.nomUser.clear();
+            localStorage.apeUser.clear();
             // Usuario.llave = null;
         }
     })
 }
-
-
 // Elements.forEach(ArrElemByTipo =>{
 //     for(element of ArrElemByTipo){
 //         if (element.disponible) {
