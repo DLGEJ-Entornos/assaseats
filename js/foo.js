@@ -93,7 +93,7 @@ for (let i = 0; i < 50; i++) {
 var coordCandidata;
 function seleccionar(coord) { //HAZ funcionalidad: Bool selec=true, COLOR GREEN +(control de cambiar selecionada)
     // debugger;
-    alert("selecionado: "+coord);
+    //alert("selecionado: "+coord);
 
     let elemento = Elements[coord[0]][coord.substring(2,coord.length)]; //asignacion q se repite en confirm() hazla en funcion
 
@@ -129,8 +129,14 @@ function confirm() {
         //ABRE 'VENTANA DE GENTIKET'(vGen) Pasandole CREDENCIALES
             //vGen = Genera cod
             let credenciales ="creden";
-            let winConfig = "centerscreen,dependent=yes";
-            var vGenTik = window.open("./tiket.html","_parent",winConfig);
+            let winConfig = "width=700,height=500";
+            var vGenTik = window.open("./tiket.html","ticket",winConfig);
+            //enviando nombreUser a ventanaHija.
+            var nodoP = vGenTik.document.createElement("p");
+            var nombreUser = document.createTextNode("manolo garcia");
+            nodoP.appendChild(nombreUser);
+            console.log(vGenTik.document.body.appendChild(nodoP));
+            //
     }else{
         if (elemento.tipo == "mesaPc") {
             alert("Has reservado esta mesa nº "+elemento.id+" con PC por: N horas.");

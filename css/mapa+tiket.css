@@ -9,7 +9,7 @@ svg{
   /* filter: drop-shadow( 3px 3px 8px #670086); */
   background-color: white;
 }
-section{
+section,form{
   text-align: center;
 }
 section article{
@@ -52,4 +52,28 @@ aside #selec{
   width: 25px;
   background-color: green;
   display: inline-block;
+}
+#tiket{
+  border: 1px solid white;
+  width: 400px;
+  margin: 0 auto;
+  background-image: url("../img/codigoBGROUND.jpg");
+  background-position-y: -10px;
+  background-attachment: fixed;
+  color: black;
+  margin-bottom: 0.5em;
+}
+#tiket samp{
+  font-size: 2em;
+}
+#impresionTik h3{
+  margin-bottom: 0px;
+  /* font-size: 5em; */
+}
+#impresionTik input,button{
+  font-size: 1.2em;
+}
+#impresionTik label{
+  font-size: 1.5em;
+  font-weight: bold;
 }
