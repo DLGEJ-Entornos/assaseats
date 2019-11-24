@@ -144,7 +144,7 @@ function confirm() {
 
     if (elemento.tipo == "mesaM") {
         //CREAMOS LA VENTANA HIJA PARA EL TIKET:
-        let winConfig = "width=700,height=700";
+        let winConfig = "width=700,height=600";
         var vGenTik = window.open("./tiket.html","ticket",winConfig);
     }else{
         if (elemento.tipo == "mesaPc") {
@@ -161,9 +161,9 @@ function confirm() {
     !NO SENTENCIAS DE CONTROL DE FLUJO DENTRO DE OBJETOS, SI FUNCIONES QUE SE PASAN MANUALMENTE PARAMETROS!
     Funcion para modificar valores a gusto(por params) de todo Elements?
 
-    Usa Screen.width para indicar que se bajen la app si estan en moviles?
-    Usa Navigator(.onLine,.canShare)
-    Window.print
+    **Usa Screen.width para indicar que se bajen la app si estan en moviles?
+    **Usa Navigator(.onLine,.canShare)
+        Window.print
 
 
 PASOS:
