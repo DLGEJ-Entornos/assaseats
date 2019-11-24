@@ -130,13 +130,22 @@ Elements.forEach(ArrElemByTipo =>{
 })
 
 function confirm() {
-    console.log(coordCandidata);
+    // console.log(coordCandidata);
+    let exit = false;
+    let arrUsers = ListaUsers.lista;
+    for (let i = 0; i < arrUsers.length && !exit; i++) {
+        if (arrUsers[i].llave != null) {
+            arrUsers[i].llave = "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data="+
+            arrUsers[i].nombreUser+coordCandidata;
+        exit = true;
+        console.log(arrUsers[i].llave);
+        }
+    }
     let elemento = Elements[coordCandidata[0]][coordCandidata.substring(2,coordCandidata.length)];
+
     if (elemento.tipo == "mesaM") {
         //ABRE 'VENTANA DE GENTIKET'(vGen) Pasandole CREDENCIALES
             //vGen = Genera cod
-            
-            //Match Usuario = Tag Selecionado
 
 
             let winConfig = "width=700,height=500";

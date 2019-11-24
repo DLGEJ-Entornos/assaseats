@@ -24,8 +24,6 @@ function chkUsr() {
 function chkPass() {
     console.log("responsePass");
     
-
-
     let passVal = false;
     console.log("responseUser");
     arrUsuarios.forEach(Usuario =>{
@@ -34,16 +32,15 @@ function chkPass() {
             btnEntrar.style = "visibility:visible;";
             btnEntrar.disabled=false;
             inUser.style = "visibility:hidden;";
+            Usuario.llave = Usuario.user;
         }else{
             inUser.style = "visibility:visible;";
             btnEntrar.disabled=true;
             btnEntrar.style = "visibility:hidden;";
-            // inPass.style = "visibility:hidden;";
+            Usuario.llave = null;
         }
     })
 }
-
-
 
 
 // Elements.forEach(ArrElemByTipo =>{
