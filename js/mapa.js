@@ -1,8 +1,6 @@
 ///// LOGIN /////
 
 
-
-
 /////////////////
 
 //Ѡ Extraemos información del DOM (tags del svg) y los almacenamos en nuestro modelo de datos.
@@ -131,17 +129,27 @@ Elements.forEach(ArrElemByTipo =>{
 
 function confirm() {
     // console.log(coordCandidata);
-    let exit = false;
-    let arrUsers = ListaUsers.lista;
-    for (let i = 0; i < arrUsers.length && !exit; i++) {
-        if (arrUsers[i].llave != null) {
-            arrUsers[i].llave = "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data="+
-            arrUsers[i].nombreUser+coordCandidata;
-        exit = true;
-        console.log(arrUsers[i].llave);
-        }
-    }
+    // let exit = false;
+    // let arrUsers = ListaUsers.lista;
+    // for (let i = 0; i < arrUsers.length && !exit; i++) {
+    //     if (arrUsers[i].llave != null) {
+    //         arrUsers[i].llave = "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data="+
+    //         arrUsers[i].nombreUser+coordCandidata;
+    //     exit = true;
+    //     console.log(arrUsers[i].llave);
+    //     }
+    // }
+
+    
+    //  arrUsers[i].llave = "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data="+
+    // arrUsers[i].nombreUser+coordCandidata;
+
+
+
     let elemento = Elements[coordCandidata[0]][coordCandidata.substring(2,coordCandidata.length)];
+
+    localStorage.llaveQR = localStorage.getItem("nomUser")+coordCandidata;
+    console.log(localStorage.getItem("llaveQR")); //string?
 
     if (elemento.tipo == "mesaM") {
         //ABRE 'VENTANA DE GENTIKET'(vGen) Pasandole CREDENCIALES

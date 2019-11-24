@@ -32,12 +32,13 @@ function chkPass() {
             btnEntrar.style = "visibility:visible;";
             btnEntrar.disabled=false;
             inUser.style = "visibility:hidden;";
-            Usuario.llave = Usuario.user;
+            localStorage.nomUser = Usuario.user; //Usuario GUARDADO?
         }else{
             inUser.style = "visibility:visible;";
             btnEntrar.disabled=true;
             btnEntrar.style = "visibility:hidden;";
-            Usuario.llave = null;
+            localStorage.Usuario.clear();
+            // Usuario.llave = null;
         }
     })
 }
