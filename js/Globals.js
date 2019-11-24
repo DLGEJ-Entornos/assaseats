@@ -5,14 +5,12 @@ function Usuario(user,pass,nombre,apellidos,llave) {
     this.apellidos = apellidos;
     this.llave =llave;
 }
-function ListaUsers(lista) { //guarda array
-    this.lista = lista;
-}
 // console.log(document.head.textContent.includes("LOGIN"));
 if (document.head.textContent.includes("LOGIN")) {
     let admin = new Usuario("admin","admin","Manolo","Garcia");
     var arrUsuarios = [];
-    arrUsuarios.push(admin);    
-    ListaUsers.lista = arrUsuarios;
+    localStorage.arrUsuarios.push(admin);    
+    
+
 }
 //var sessionUser; //obj con usuario que ha iniciado sesion.

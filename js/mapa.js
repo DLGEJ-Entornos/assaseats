@@ -141,20 +141,22 @@ function confirm() {
     // }
 
     
-    //  arrUsers[i].llave = "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data="+
-    // arrUsers[i].nombreUser+coordCandidata;
+    
 
 
 
     let elemento = Elements[coordCandidata[0]][coordCandidata.substring(2,coordCandidata.length)];
 
     localStorage.llaveQR = localStorage.getItem("nomUser")+coordCandidata;
-    console.log(localStorage.getItem("llaveQR")); //string?
+    console.log(localStorage.getItem("llaveQR"));
 
+    localStorage.llaveQR = "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data="+
+        localStorage.llaveQR;
+
+    console.log(localStorage);
     if (elemento.tipo == "mesaM") {
         //ABRE 'VENTANA DE GENTIKET'(vGen) Pasandole CREDENCIALES
             //vGen = Genera cod
-
 
             let winConfig = "width=700,height=500";
             var vGenTik = window.open("./tiket.html","ticket",winConfig);
@@ -166,12 +168,11 @@ function confirm() {
             //
     }else{
         if (elemento.tipo == "mesaPc") {
-            alert("Has reservado esta mesa nº "+elemento.id+" con PC por: N horas.");
+            alert("Has reservado esta mesa nº "+elemento.id+" con PC.");
         }else
-            alert("Has reservado esta sala nº "+elemento.id+" con PC por: N horas.");
+            alert("Has reservado esta sala nº "+elemento.id+" con PC.");
     }
 }
-
 /*mesaTOT:93
     mesaMarron:63
     mesapc: 30
