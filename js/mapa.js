@@ -21,7 +21,6 @@ function getTipo(tag) { //esto es validación mas q otra cosa?
 }
 
 function getColor() { //NO DEVUELVAS VALOR, CAMBIA EL COLOR DEL OBJETO EN EL DOM (THIS.TAG valdria?, pasado por referencia?)
-    console.log("entra en getColor");
     if (!this.disponible) {
         this.tag.style.fill = "red";
     }else{
@@ -145,13 +144,10 @@ function confirm() {
     if (elemento.tipo == "mesaM") {
         //CREAMOS LA VENTANA HIJA PARA EL TIKET:
         let winConfig = "width=700,height=600";
+         //debugger;
+         
+        var intervalo = setInterval(checkCierre, 500);
         var vGenTik = window.open("./tiket.html","ticket",winConfig);
-
-        if (vGenTik.closed == false) {
-            console.log("no se ha cerrado.");
-        }else{
-            console.log("se ha cerrado.");
-        }
 
     }else{
         if (elemento.tipo == "mesaPc") {
@@ -159,13 +155,22 @@ function confirm() {
         }else
             alert("Has reservado esta sala nº "+elemento.id+" con PC.");
     }
-    function checkCierre(ojbVentana) {
-        
-    }
-     
-    //COMPROBAR
-    setTimeout(checkCierre(vGenTik), 3000);
 
+
+    function checkCierre() {
+        // console.log(vGenTik); //error cross-origin?
+        if (vGenTik != undefined) {
+            if (vGenTik.closed) {
+                alert("Email enviado!");
+                clearInterval(intervalo);
+            }else{
+                console.log("esta abierta.")
+            }    
+        }else{
+            console.log("no definida");
+        }
+    }
+    
 }
 /*mesaTOT:93
     mesaMarron:63
