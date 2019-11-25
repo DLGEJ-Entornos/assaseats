@@ -1,4 +1,4 @@
-/////Ѡ RECUPERANDO CREDENCIALES DEL USUARIO LOGUEADO /////
+///// ▶RECUPERANDO CREDENCIALES DEL USUARIO LOGUEADO /////
 console.log(localStorage.getItem("nomUser"));
 console.log(localStorage.getItem("apeUser"));
 /////////////////
@@ -146,12 +146,26 @@ function confirm() {
         //CREAMOS LA VENTANA HIJA PARA EL TIKET:
         let winConfig = "width=700,height=600";
         var vGenTik = window.open("./tiket.html","ticket",winConfig);
+
+        if (vGenTik.closed == false) {
+            console.log("no se ha cerrado.");
+        }else{
+            console.log("se ha cerrado.");
+        }
+
     }else{
         if (elemento.tipo == "mesaPc") {
             alert("Has reservado esta mesa nº "+elemento.id+" con PC.");
         }else
             alert("Has reservado esta sala nº "+elemento.id+" con PC.");
     }
+    function checkCierre(ojbVentana) {
+        
+    }
+     
+    //COMPROBAR
+    setTimeout(checkCierre(vGenTik), 3000);
+
 }
 /*mesaTOT:93
     mesaMarron:63

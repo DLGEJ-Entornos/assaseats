@@ -1,3 +1,4 @@
+///// ▶CREANDO LA ESTRUCTURA DE DATOS QUE /////
 function Usuario(user,pass,nombre,apellidos,llave) {
     this.user = user;
     this.pass = pass;
@@ -31,7 +32,6 @@ function chkUsr() {
     })
 }
 function chkPass() {
-    
     let passVal = false;
     arrUsuarios.forEach(Usuario =>{
         if (inPass.value == Usuario.pass) {
@@ -46,8 +46,8 @@ function chkPass() {
             inUser.style = "visibility:visible;";
             btnEntrar.disabled=true;
             btnEntrar.style = "visibility:hidden;";
-            localStorage.nomUser.clear();
-            localStorage.apeUser.clear();
+            localStorage.nomUser = "";
+            localStorage.apeUser = "";
             // Usuario.llave = null;
         }
     })

@@ -9,8 +9,6 @@ function Usuario(user,pass,nombre,apellidos,llave) {
 if (document.head.textContent.includes("LOGIN")) {
     let admin = new Usuario("admin","admin","Manolo","Garcia");
     var arrUsuarios = [];
-    localStorage.arrUsuarios.push(admin);    
-    
-
+    localStorage.arrUsuarios.push(admin);
 }
 //var sessionUser; //obj con usuario que ha iniciado sesion.
