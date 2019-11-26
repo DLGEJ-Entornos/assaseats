@@ -78,3 +78,18 @@ aside #selec{
   font-size: 1.5em;
   font-weight: bold;
 }
+aside label{
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: 1.3em;
+}
+aside button{
+  padding: 0.2em;
+  margin-top: 0.5em;
+  background-color: #33363a;
+  color: rgb(184, 184, 184);
+  border: 2px solid #33363a; 
+  cursor: pointer;
+}
+aside button:hover{
+  color: green;
+}
