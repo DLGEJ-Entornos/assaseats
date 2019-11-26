@@ -37,6 +37,7 @@ function getColor() {
     }
 }   
 //★9 DEFINICIÓN DEL OBJETO ELEMENTO
+// REQ.
 function Elemento(tipo,id,disponible,selec,tag,coord) { //tag es por REFERENCIA
     this.tipo = tipo;
     this.id = id;
@@ -46,8 +47,9 @@ function Elemento(tipo,id,disponible,selec,tag,coord) { //tag es por REFERENCIA
     this.tag = tag;
     this.coord = coord;
 }
-
 //★10 CREAR ARRAY DE ELEMENTOS, CAPTURARLOS DEL DOM , GENERAR OBJETO CON ELLOS Y METERLOS EN ARRAY.
+
+// REQ.
 var Elements = [new Array(63),new Array(30),new Array(34)]; //MesasMarrones , MesasPcs, Salas
 for (let i = 0; i < 63; i++) {
     let tagMesaM = document.getElementById("mesaMarron"+i);
@@ -141,6 +143,7 @@ function confirm() {
          //debugger;
 
         var intervalo = setInterval(checkCierre, 500);
+        // REQ.
         var vGenTik = window.open("./tiket.html","ticket",winConfig);
 
     }else{
@@ -152,11 +155,16 @@ function confirm() {
 
 //★15 COMPRUEBA QUE SE HA CERRADO LA VENTANA HIJA PARA LANZAR ALERT
     function checkCierre() {
-        // console.log(vGenTik); //error cross-origin?
+        
         if (vGenTik != undefined) {
             if (vGenTik.closed) {
                 alert("Email enviado!");
                 clearInterval(intervalo);
+                // REQ.
+                if (navigator.maxTouchPoints == 0 && screen.width > 1500) {
+                    alert("También puedes usar desde el móvil nuestra APP!");
+                }
+
             }else{
                 console.log("esta abierta.")
             }    

@@ -9,5 +9,5 @@ Recomiendo:
 	Clicar en Entrar.
 
 
-Hay un glosario al final del documento que aclara los colores usados en la memoria y las estrellas con numeros(referencias al codigo).(referencias al codigo).
+Hay un glosario al final del documento que aclara los colores usados en la memoria y referencias al codigo requisitos etc.
 

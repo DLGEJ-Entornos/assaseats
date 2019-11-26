@@ -19,7 +19,7 @@ inPass.disabled = true;
 ///// ★3
 function chkUsr() {
     let userVal = false;
-    arrUsuarios.forEach(Usuario =>{
+    arrUsuarios.forEach(Usuario =>{ // REQ.
         if (inUser.value == Usuario.user) {
             userVal = true;
             inPass.disabled = false;
