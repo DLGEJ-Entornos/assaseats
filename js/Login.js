@@ -1,11 +1,11 @@
-///// ▶CREANDO LA ESTRUCTURA DE DATOS QUE /////
-function Usuario(user,pass,nombre,apellidos,llave) {
+///// ★1 CREANDO LA ESTRUCTURA DE DATOS PARA LOS USUARIOS
+function Usuario(user,pass,nombre,apellidos) {
     this.user = user;
     this.pass = pass;
     this.nombre = nombre;
     this.apellidos = apellidos;
-    this.llave =llave;
 }
+///// ★2
 let admin = new Usuario("admin","admin","Manolo","Garcia");
 var arrUsuarios = [];
 arrUsuarios.push(admin);
@@ -16,13 +16,14 @@ let inUser = document.getElementById("user");
 let inPass = document.getElementById("pass");
 inPass.disabled = true;
 
+///// ★3
 function chkUsr() {
     let userVal = false;
     arrUsuarios.forEach(Usuario =>{
         if (inUser.value == Usuario.user) {
             userVal = true;
             inPass.disabled = false;
-            // debugger;
+            
             inPass.style = "visibility:visible;";
         }else{
             inPass.disabled = false;
@@ -31,6 +32,7 @@ function chkUsr() {
         }
     })
 }
+///// ★4
 function chkPass() {
     let passVal = false;
     arrUsuarios.forEach(Usuario =>{
@@ -40,6 +42,7 @@ function chkPass() {
             btnEntrar.disabled=false;
             inUser.style = "visibility:hidden;";
             
+            ///// ★5
             localStorage.nomUser = Usuario.nombre;  //GUARDADO PERMANENTE DE CREDENCIALES
             localStorage.apeUser = Usuario.apellidos;
         }else{
@@ -48,15 +51,6 @@ function chkPass() {
             btnEntrar.style = "visibility:hidden;";
             localStorage.nomUser = "";
             localStorage.apeUser = "";
-            // Usuario.llave = null;
         }
     })
 }
-// Elements.forEach(ArrElemByTipo =>{
-//     for(element of ArrElemByTipo){
-//         if (element.disponible) {
-//             element.tag.setAttribute("onclick", "seleccionar('"+element.coord+"')");
-//             element.changeColor();
-//         }
-//     } 
-// })

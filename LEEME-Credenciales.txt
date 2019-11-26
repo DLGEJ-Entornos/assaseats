@@ -1,0 +1,13 @@
+Para entrar en la aplicación, al interactuar con la pantalla de login usar:
+
+	Usuario: admin
+	Contraseña: admin
+
+Recomiendo:
+	Introducir usuario + Enter
+	Tab + Introducir Pass + Tab
+	Clicar en Entrar.
+
+
+Hay un glosario al final del documento que aclara los colores usados en la memoria y las estrellas con numeros(referencias al codigo).(referencias al codigo).
+

@@ -1,12 +1,8 @@
-///// ▶RECUPERANDO CREDENCIALES DEL USUARIO LOGUEADO /////
-console.log(localStorage.getItem("nomUser"));
-console.log(localStorage.getItem("apeUser"));
-/////////////////
-
-//Ѡ Extraemos información del DOM (tags del svg) y los almacenamos en nuestro modelo de datos.
+//★6 Extraemos información del DOM (tags del svg) y los almacenamos en nuestro modelo de datos.
 var btnConfirmar = document.getElementById("confirm");
 btnConfirmar.disabled = true;
 
+//★7 COMPRUEBA EL TIPO DE ELEMENTO QUE RECOGEMOS Y LE ASIGNA AL OBJ. LA PROPIEDAD TIPO
 function getTipo(tag) { //esto es validación mas q otra cosa?
 
     if (tag.tagName == "circle") {
@@ -20,7 +16,8 @@ function getTipo(tag) { //esto es validación mas q otra cosa?
         alert("Error, la etiqueta no es ni circulo , ni rectangulo. Es: "+tag.tagName);
 }
 
-function getColor() { //NO DEVUELVAS VALOR, CAMBIA EL COLOR DEL OBJETO EN EL DOM (THIS.TAG valdria?, pasado por referencia?)
+//★8 METODO QUE RENDERIZA EL COLOR DEL ELEMENTO SEGUN EL VALOR DE SUS PROPIEDADES
+function getColor() {
     if (!this.disponible) {
         this.tag.style.fill = "red";
     }else{
@@ -39,43 +36,45 @@ function getColor() { //NO DEVUELVAS VALOR, CAMBIA EL COLOR DEL OBJETO EN EL DOM
         }
     }
 }   
-function Elemento(tipo,id,disponible,genCod,selec,tag,coord) { //tag es por REFERENCIA o por valor?
+//★9 DEFINICIÓN DEL OBJETO ELEMENTO
+function Elemento(tipo,id,disponible,selec,tag,coord) { //tag es por REFERENCIA
     this.tipo = tipo;
     this.id = id;
     this.disponible = disponible;
-    this.genCod = genCod;
     this.selec = selec;
     this.changeColor = getColor;
     this.tag = tag;
     this.coord = coord;
 }
 
+//★10 CREAR ARRAY DE ELEMENTOS, CAPTURARLOS DEL DOM , GENERAR OBJETO CON ELLOS Y METERLOS EN ARRAY.
 var Elements = [new Array(63),new Array(30),new Array(34)]; //MesasMarrones , MesasPcs, Salas
 for (let i = 0; i < 63; i++) {
     let tagMesaM = document.getElementById("mesaMarron"+i);
     let tagMesaPc = document.getElementById("mesaPc"+i);
     let tagSala = document.getElementById("sala"+i);
     
-    // recoger tags en matriz o directamente generar objetos Elementos e introducirlos en un array de Obj elementos? Mejor esto ,no?
+
     if (tagMesaM != null) {
         let persCoord = "0,"+i;
-        let elMesaM = new Elemento(getTipo(tagMesaM),tagMesaM.id,true,false,false,tagMesaM,persCoord);
+        let elMesaM = new Elemento(getTipo(tagMesaM),tagMesaM.id,true,false,tagMesaM,persCoord);
         Elements[0][i] = elMesaM;
     }
     if (tagMesaPc != null) {
         let persCoord = "1,"+i;
-        let elMesaPc = new Elemento(getTipo(tagMesaPc),tagMesaPc.id,true,false,false,tagMesaPc,persCoord);
+        let elMesaPc = new Elemento(getTipo(tagMesaPc),tagMesaPc.id,true,false,tagMesaPc,persCoord);
         Elements[1][i] = elMesaPc;
     }
     if (tagSala != null) {
         let persCoord = "2,"+i;
-        let elSala = new Elemento(getTipo(tagSala),tagSala.id,true,false,false,tagSala,persCoord);
+        let elSala = new Elemento(getTipo(tagSala),tagSala.id,true,false,tagSala,persCoord);
         Elements[2][i] = elSala;
     }
 }
 
-//Ѡ BLOQUEO DE 100
+//★11 BLOQUEO DE 100 ELEMENTOS POR DEFECTO (DE TODOS LOS TIPOS)
     //mMarron(63) => 50 //mesaPc(30) => 20 //sala(34) => 30
+
 for (let i = 0; i < 50; i++) {
     // debugger;
     Elements[0][i].disponible = false;
@@ -91,10 +90,12 @@ for (let i = 0; i < 50; i++) {
     }
 }
 
-var coordCandidata;
-function seleccionar(coord) { //HAZ funcionalidad: Bool selec=true, COLOR GREEN +(control de cambiar selecionada)
 
-    let elemento = Elements[coord[0]][coord.substring(2,coord.length)]; //asignacion q se repite en confirm() hazla en funcion
+//★12 SELECIONAMOS EL OBJETO VINCULADO A SU ETIQUETA CON EVENTO ONCLICK DISPARADO
+var coordCandidata;
+function seleccionar(coord) {
+
+    let elemento = Elements[coord[0]][coord.substring(2,coord.length)];
 
     if (!btnConfirmar.disabled && coord != coordCandidata) { //ya hay 1 selec y estas selec OTRO
         alert("Sólo puedes hacer 1 reserva. Deselecciona la actual.");
@@ -111,7 +112,9 @@ function seleccionar(coord) { //HAZ funcionalidad: Bool selec=true, COLOR GREEN 
         } 
     }
 }
-//Haciendo seleccionables los Disponibles (EVENTonclick+changeColor en tag)
+
+
+//★13 Haciendo seleccionables los Disponibles (EVENTonclick+changeColor en tag)
 Elements.forEach(ArrElemByTipo =>{
     for(element of ArrElemByTipo){
         if (element.disponible) {
@@ -120,18 +123,9 @@ Elements.forEach(ArrElemByTipo =>{
         }
     } 
 })
+
+//★14  CUANDO EL ELEMENTO SE HA SELECIONADO Y CONFIRMADO SE CONFIGURA SU TIKET Y SE ABRE LA VENTANA HIJA
 function confirm() {
-    // console.log(coordCandidata);
-    // let exit = false;
-    // let arrUsers = ListaUsers.lista;
-    // for (let i = 0; i < arrUsers.length && !exit; i++) {
-    //     if (arrUsers[i].llave != null) {
-    //         arrUsers[i].llave = "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data="+
-    //         arrUsers[i].nombreUser+coordCandidata;
-    //     exit = true;
-    //     console.log(arrUsers[i].llave);
-    //     }
-    // }
  
     let elemento = Elements[coordCandidata[0]][coordCandidata.substring(2,coordCandidata.length)];
 
@@ -145,18 +139,18 @@ function confirm() {
         //CREAMOS LA VENTANA HIJA PARA EL TIKET:
         let winConfig = "width=700,height=600";
          //debugger;
-         
+
         var intervalo = setInterval(checkCierre, 500);
         var vGenTik = window.open("./tiket.html","ticket",winConfig);
 
     }else{
         if (elemento.tipo == "mesaPc") {
-            alert("Has reservado esta mesa nº "+elemento.id+" con PC.");
+            alert("Has reservado esta mesa con ID: "+elemento.id+".");
         }else
-            alert("Has reservado esta sala nº "+elemento.id+" con PC.");
+            alert("Has reservado esta sala con ID: "+elemento.id+".");
     }
 
-
+//★15 COMPRUEBA QUE SE HA CERRADO LA VENTANA HIJA PARA LANZAR ALERT
     function checkCierre() {
         // console.log(vGenTik); //error cross-origin?
         if (vGenTik != undefined) {
@@ -172,30 +166,3 @@ function confirm() {
     }
     
 }
-/*mesaTOT:93
-    mesaMarron:63
-    mesapc: 30
-    sala:34
-        ELEMENTOS TOTALES: 127 - PREBLOQUEADOS: 100
-    !NO SENTENCIAS DE CONTROL DE FLUJO DENTRO DE OBJETOS, SI FUNCIONES QUE SE PASAN MANUALMENTE PARAMETROS!
-    Funcion para modificar valores a gusto(por params) de todo Elements?
-
-    **Usa Screen.width para indicar que se bajen la app si estan en moviles?
-    **Usa Navigator(.onLine,.canShare)
-        Window.print
-
-
-PASOS:
-    1- Coger Todos los id's de objetos diferenciando entre sus tipos. OK
-    2- BLOQUEAR 100. (mas alante de forma random). DISPONIBLES POR DEF (EN CREACION DE OBJ) OK
-    3- SI esta disponible,  ADDAtribute element.onclick=clicable() OK
-        3.1- Si Activar clicable() => .selec=true OK
-        3.2- Si .select = true => HABILITAR Confirmar (DEJAR pal final)
-    4- SI click en otro elemento selecionable , NO PERMITIR Primero DESCLICAR. OK
-    5- al clicar CONFIRMAR
-        5.1 - Obtener el tipo de elemento; 
-            5.1.1 - Si es MESA MARRON => Imprimir CODIGO Con Credenciales.
-                new vGen(crendenciales,SeedCodigo?) ; vGen (BtnEnviarEmail(CODIGO | ventana))
-                                                    En VentanaMAPA = Alert Mail Enviado!
-            5.1.2 - Else noMesaMarron => mensaje de reserva hecho(PC Bloqueado).
-*/ 
